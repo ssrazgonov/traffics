@@ -1,0 +1,21 @@
+html{
+	height: 100vh;
+}
+body{
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+main{
+	flex:1;
+}
+footer{
+	padding: 1.5em;
+}
+iframe{
+	min-height: 90vh;
+}
+.traffic-map{
+	height: 90vh;
+	width: 100%;
+}
