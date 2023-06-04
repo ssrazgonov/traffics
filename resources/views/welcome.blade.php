@@ -38,12 +38,13 @@
             <div class="col-md-3">
                 <form>
   <fieldset>
+      <div class="mb-3">
+          <h3>Сообщение о неисправности светофора</h3>
+      </div>
     <div class="alert alert-success" role="alert">
  Отсканируйте qr-код наклеенный на столбе светофора или выберите нужный светофор на карте, после чего заполните форму ниже
 </div>
-    <div class="mb-3">
-        <h3>Сообщение о неисправности светофора</h3>
-    </div>
+
       <label for="select" class="form-label">Выберите неисправность</label>
       <select id="select" class="form-select">
         <option>Светофор не горит</option>
