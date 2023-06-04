@@ -11,7 +11,7 @@ let map = ymaps.ready(function() {
 
     	let preset = traffics[traffic].status == 'working' ? "islands#greenIcon" : "islands#redIcon";
 
-	    var myPlacemark = new ymaps.Placemark([traffics[traffic].location_y, traffics[traffic].location_x],
+	    var myPlacemark = new ymaps.Placemark([traffics[traffic].location_x, traffics[traffic].location_y],
 	    {
     		hintContent: traffics[traffic].id,
             balloonContent: traffics[traffic].address
