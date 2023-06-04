@@ -75,6 +75,6 @@
     var traffics = @json($traffic_lights);
     console.log(traffics);
 </script>
-<script src="/app.js"></script>
+<script src="/app.js?version_1.0"></script>
 </body>
 </html>
