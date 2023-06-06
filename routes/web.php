@@ -17,4 +17,12 @@ Route::get('/', [\App\Http\Controllers\Controller::class, 'main']);
 
 Route::get('/dashboard', [\App\Http\Controllers\Controller::class, 'dashboard']);
 
-Route::post('/appeal/create', [\App\Http\Controllers\Controller::class, 'createAppeal']);
+Route::post('/appeal/create', [\App\Http\Controllers\Controller::class, 'createAppeal'])->name('appeal.create');
+
+Route::get('/appeal/backlog', [\App\Http\Controllers\Controller::class, 'getBacklog']);
+
+Route::get('/appeal/worker', [\App\Http\Controllers\Controller::class, 'getWorker']);
+
+Route::get('/appeal/edit/{id}', [\App\Http\Controllers\Controller::class, 'edit']);
+
+Route::get('/appeal/view', [\App\Http\Controllers\Controller::class, 'view']);

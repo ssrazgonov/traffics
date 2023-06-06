@@ -19,3 +19,14 @@ iframe{
 	height: 90vh;
 	width: 100%;
 }
+.appeals-table{
+    min-width: 360px;
+    max-width: 1000px;
+}
+.appeals-table table{
+    width: 100%;
+}
+
+.appeal-map {
+    height: 400px;
+}

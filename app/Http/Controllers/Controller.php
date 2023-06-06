@@ -38,7 +38,7 @@ class Controller extends BaseController
 
     public function createAppeal(Request $request, CreateAppealAction $createAppealAction)
     {
-        $validated = $request->validate([
+        $request->validate([
             'traffic_light_id' => ['required'],
             'type_of_crash' => ['required'],
             'comment' => ['sometimes', 'string']
@@ -50,8 +50,33 @@ class Controller extends BaseController
         $dto->typeOfCrash= $request->type_of_crash;
         $dto->comment = $request->comment;
 
-        $createAppealAction($dto);
+        $actionResult = $createAppealAction($dto);
 
-        return redirect()->back();
+        return redirect()->back()->with([
+            'success_appeal_create' => true,
+        ]);
     }
+
+    function getBacklog()
+    {
+        return view('admin.appeals_backlog');
+    }
+
+    function getWorker()
+    {
+        return view('admin.appeals_worker');
+    }
+    function edit($id)
+    {
+        return view('admin.appeals_edit')->with([
+            'id' => $id
+        ]);
+    }
+
+    function view()
+    {
+        return view('admin.appeals_view');
+    }
+
+
 }

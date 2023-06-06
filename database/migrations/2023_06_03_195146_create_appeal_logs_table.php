@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('appeal_logs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('appeal_id');
             $table->text('log_text');
         });
     }

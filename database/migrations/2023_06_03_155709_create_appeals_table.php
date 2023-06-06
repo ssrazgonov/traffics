@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('engineer_id')->nullable();
             $table->string('status')->default('created');
             $table->integer('traffic_light_id');
+            $table->string('type_of_crash')->nullable();
+            $table->text('comment')->nullable();
         });
     }
 
