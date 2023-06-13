@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('traffic_lights', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('location_x')->nullable();
-            $table->string('location_y')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->string('address');
             $table->string('status')->default('working');
         });

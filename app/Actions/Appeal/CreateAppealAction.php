@@ -4,6 +4,7 @@ namespace App\Actions\Appeal;
 
 use App\Dto\Action\Appeal\CreateAppealActionDto;
 use App\Dto\Action\Appeal\CreateAppealActionResponseDto;
+use App\Enums\AppealStatus;
 use App\Models\Appeal;
 use App\Models\AppealLog;
 
@@ -18,15 +19,15 @@ class CreateAppealAction
                 'traffic_light_id' => $dto->trafficLightId,
                 'type_of_crash' => $dto->typeOfCrash,
                 'comment' => $dto->comment,
+                'status' => AppealStatus::NOT_PROCESSED->value,
             ]);
 
             AppealLog::query()->create([
                 'appeal_id' => $appeal->id,
-                'log_text' => 'Сообщение создано',
+                'log_text' => 'Статус заявки: ' . $appeal->status->getTitle() . ' Заявка создана.',
             ]);
 
         } catch (\Throwable $e) {
-            dd($e);
             $response->success = false;
         }
 

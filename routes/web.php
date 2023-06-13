@@ -13,16 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\Controller::class, 'main']);
+Route::get('/', [\App\Http\Controllers\SiteController::class, 'main']);
 
-Route::get('/dashboard', [\App\Http\Controllers\Controller::class, 'dashboard']);
+Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'dashboard']);
 
-Route::post('/appeal/create', [\App\Http\Controllers\Controller::class, 'createAppeal'])->name('appeal.create');
+Route::post('/dashboard/appeals/create', [\App\Http\Controllers\AppealController::class, 'createAppeal'])->name('appeal.create');
 
-Route::get('/appeal/backlog', [\App\Http\Controllers\Controller::class, 'getBacklog']);
+Route::get('/dashboard/appeals/backlog', [\App\Http\Controllers\AppealController::class, 'getInBacklog'])->name('appeals.log');
+Route::get('/dashboard/appeals/works', [\App\Http\Controllers\AppealController::class, 'getInWorks'])->name('appeals.works');
+Route::get('/dashboard/appeals/edit/{id}', [\App\Http\Controllers\AppealController::class, 'edit'])->name('appeals.edit');
+Route::get('/dashboard/appeals/view/{id}', [\App\Http\Controllers\AppealController::class, 'view'])->name('appeals.view');
+Route::post('/dashboard/appeals/operator/save', [\App\Http\Controllers\OperatorController::class, 'saveAppeal'])->name('appeals.operator_save');
 
-Route::get('/appeal/worker', [\App\Http\Controllers\Controller::class, 'getWorker']);
+Route::get('/dashboard/operators/list', [\App\Http\Controllers\OperatorController::class, 'index'])->name('operators.list');
+Route::get('/dashboard/operators/view/{id}', [\App\Http\Controllers\OperatorController::class, 'view']);
+Route::get('/dashboard/operators/edit/{id}', [\App\Http\Controllers\OperatorController::class, 'edit']);
 
-Route::get('/appeal/edit/{id}', [\App\Http\Controllers\Controller::class, 'edit']);
+Route::get('/dashboard/engineers/list', [\App\Http\Controllers\EngineerController::class, 'index']);
+Route::get('/dashboard/engineers/view/{id}', [\App\Http\Controllers\EngineerController::class, 'view']);
+Route::get('/dashboard/engineers/edit/{id}', [\App\Http\Controllers\EngineerController::class, 'edit']);
 
-Route::get('/appeal/view', [\App\Http\Controllers\Controller::class, 'view']);
+Route::get('/dashboard/traffic-lights/list', [\App\Http\Controllers\TrafficLightController::class, 'index']);
+Route::get('/dashboard/traffic-lights/view/{id}', [\App\Http\Controllers\TrafficLightController::class, 'view']);
+Route::get('/dashboard/traffic-lights/edit/{id}', [\App\Http\Controllers\TrafficLightController::class, 'edit']);

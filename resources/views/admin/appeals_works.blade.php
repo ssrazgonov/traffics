@@ -1,8 +1,7 @@
 @extends('admin.dashboard')
 
 @section('content')
-
-    <h1 class="pb-4">Необработанные заявки</h1>
+    <h1 class="pb-4">Заявки в работе</h1>
     <div class="appeals-table">
         <table class="text-center table-light table">
             <tr>
@@ -15,17 +14,29 @@
                 <th>
                     светофор
                 </th>
-                <th>статус</th>
                 <th>
-                    действия
+                    статус
                 </th>
+                <th>
+                    инженер
+                </th>
+                <th></th>
             </tr>
+
+            @if(!$appeals)
+                <tr>
+                    <td>
+                        Нет заявок
+                    </td>
+                </tr>
+            @endif
             @foreach($appeals as $appeal)
                 <tr>
                     <td>{{$appeal->id}}</td>
                     <td>{{$appeal->created_at}}</td>
                     <td>{{$appeal->trafficLight->address}}</td>
                     <td>{{$appeal->status->title()}}</td>
+                    <td>{{$appeal->engineer->name}}</td>
                     <td>
                         <a href="{{route('appeals.view', $appeal->id)}}">перейти</a>
                         <a href="{{route('appeals.edit', $appeal->id)}}">редактировать</a>
@@ -34,5 +45,4 @@
             @endforeach
         </table>
     </div>
-
 @endsection

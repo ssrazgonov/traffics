@@ -20,18 +20,13 @@
                     действия
                 </th>
             </tr>
-            @foreach($appeals as $appeal)
-                <tr>
-                    <td>{{$appeal->id}}</td>
-                    <td>{{$appeal->created_at}}</td>
-                    <td>{{$appeal->trafficLight->address}}</td>
-                    <td>{{$appeal->status->title()}}</td>
-                    <td>
-                        <a href="{{route('appeals.view', $appeal->id)}}">перейти</a>
-                        <a href="{{route('appeals.edit', $appeal->id)}}">редактировать</a>
-                    </td>
-                </tr>
-            @endforeach
+            <tr>
+                <td>2</td>
+                <td>10.02.2023</td>
+                <td>ул. Хренникова</td>
+                <td>необработанно</td>
+                <td><a href="">перейти</a></td>
+            </tr>
         </table>
     </div>
 

@@ -34,8 +34,8 @@ class LoadFromCSVAction
             TrafficLights::query()->updateOrCreate([
                 'address' => $address,
             ], [
-                'location_x' => $location_x,
-                'location_y' => $location_y,
+                'latitude' => $location_x,
+                'longitude' => $location_y,
                 'address' => $address,
             ]);
         }

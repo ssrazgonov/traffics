@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('appeal_id');
             $table->text('log_text');
+            $table->string('status');
         });
     }
 

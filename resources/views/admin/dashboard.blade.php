@@ -8,12 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.112.5">
-    <title>Sidebars · Bootstrap v5.3</title>
 
+    <title>Панель управления</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style.css">
+
     <head>
         <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU" type="text/javascript">
         </script>
@@ -115,6 +116,7 @@
         <link href="sidebars.css" rel="stylesheet">
     </head>
 <body>
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -166,7 +168,6 @@
     </ul>
 </div>
 
-
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
         <title>Bootstrap</title>
@@ -201,13 +202,13 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="{{route('appeals.works')}}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
                     Заявки в работе
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="{{route('appeals.log')}}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
                     Не обработанные заявки
                 </a>
@@ -241,44 +242,13 @@
         </div>
     </div>
 
-    <div class="d-flex flex-column p-5">
-        <h1 class="pb-4">Необработанные заявки</h1>
-        <div class="appeals-table">
-            <table class="text-center table-light table">
-                <tr>
-                    <th>
-                        id
-                    </th>
-                    <th>
-                        время
-                    </th>
-                    <th>
-                        светофор
-                    </th>
-                    <th>
-                        статус
-                    </th>
-                    <th>
-                        инженер
-                    </th>
-                    <th>
-                        действия
-                    </th>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>10.02.2023</td>
-                    <td>ул. Хренникова</td>
-                    <td>в работе</td>
-                    <td>Иванов В.И.</td>
-                    <td><a href="">перейти</a></td>
-                </tr>
-            </table>
-        </div>
+    <div class="d-flex flex-column p-5 flex-fill">
+        @yield('content')
     </div>
 
 </main>
 <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 <script src="sidebars.js"></script></body>
+    @yield('footer_scripts')
 </html>
