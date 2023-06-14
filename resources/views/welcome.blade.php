@@ -110,6 +110,6 @@
     var currentTrafficLightId = {{$trafficId ?? 'null'}};
     var traffics = @json($traffic_lights);
 </script>
-<script src="/app.js?version_1.0"></script>
+<script src="/app.js?version_1.9"></script>
 </body>
 </html>
