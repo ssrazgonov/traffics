@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('appeal', function (Blueprint $table) {
+        Schema::table('appeals', function (Blueprint $table) {
             $table->string('operator_comment')->nullable();
             $table->string('engineer_comment')->nullable();
         });
