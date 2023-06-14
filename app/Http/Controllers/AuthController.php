@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Appeal\CreateAppealAction;
 use App\Actions\TrafficLights\LoadFromCSVAction;
 use App\Dto\Action\Appeal\CreateAppealActionDto;
-use App\Models\TrafficLights;
+use App\Models\TrafficLight;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -23,6 +23,10 @@ class AuthController extends BaseController
 
     public function login(Request $request)
     {
-        return redirect('dashboard');
+        if (auth()->attempt($request->toArray())) {
+            return redirect()->intended('/dashboard');
+        };
+
+        return redirect()->back()->withErrors(['message' => 'Неверные учетные данные']);
     }
 }

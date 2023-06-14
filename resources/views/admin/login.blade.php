@@ -9,8 +9,38 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <main class="container-fluid">
+    <main class="d-flex justify-content-center align-items-center">
 
+        <form action="{{route('auth-login')}}" method="post">
+            @if($errors->has('message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$errors->first('message')}}
+                </div>
+            @endif
+
+            <h1>Вход в панель управления</h1>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input type="email" id="form2Example1" class="form-control" name="email"/>
+                <label class="form-label" for="form2Example1">Email адрес</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" id="form2Example2" class="form-control" name="password"/>
+                <label class="form-label" for="form2Example2">Пароль</label>
+            </div>
+
+            </div>
+
+            <!-- Submit button -->
+            <button class="btn btn-primary btn-block mb-4">Войти</button>
+
+            <!-- Register buttons -->
+            <div class="text-center">
+                <p>Нет профиля? <a href="#!">Регистрация</a></p>
+            </div>
+        </form>
     </main>
 </body>
 </html>

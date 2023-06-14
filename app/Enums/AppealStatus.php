@@ -9,6 +9,8 @@ enum AppealStatus: string
     case IN_WORK = 'in_work';
     case REJECTED = 'rejected';
     case CLOSED = 'closed';
+    case Awaiting = 'awaiting';
+    case Returned = 'returned';
 
     public function title(): string
     {
@@ -18,6 +20,8 @@ enum AppealStatus: string
             self::IN_WORK => 'В работе',
             self::REJECTED => 'Отклонена',
             self::CLOSED => 'Закрыта',
+            self::Awaiting => 'Ожидает проверки оператора',
+            self::Returned => 'Возвращена на доработку',
         };
     }
 }

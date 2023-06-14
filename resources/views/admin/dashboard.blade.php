@@ -201,43 +201,63 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
+            @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
             <li>
                 <a href="{{route('appeals.works')}}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
                     Заявки в работе
                 </a>
             </li>
+            @endif
+                @if(auth()->user()->role_id == 2)
+                    <li>
+                        <a href="{{route('appeals.returned')}}" class="nav-link text-white">
+                            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+                            Заявки на доработке
+                        </a>
+                    </li>
+                @endif
+            @if(auth()->user()->role_id == 1)
             <li>
                 <a href="{{route('appeals.log')}}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
                     Не обработанные заявки
                 </a>
             </li>
+            @endif
+
+            @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="{{route('appeals.awaiting')}}" class="nav-link text-white">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+                    Ожидают проверки
+                </a>
+            </li>
+            @endif
+
+            @if(auth()->user()->role_id == 3)
+            <li>
+                <a href="{{route('operators.list')}}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
                     Операторы
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="{{route('engineers.list')}}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
                     Инженеры
                 </a>
             </li>
+            @endif
         </ul>
         <hr>
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>mdo</strong>
+                <strong>{{auth()->user()->name}}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li><a class="dropdown-item" href="#">Выйти</a></li>
             </ul>
         </div>
     </div>

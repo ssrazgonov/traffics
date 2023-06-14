@@ -9,7 +9,7 @@ use App\Enums\AppealStatus;
 use App\Enums\TypeOfCrash;
 use App\Models\Appeal;
 use App\Models\AppealLog;
-use App\Models\TrafficLights;
+use App\Models\TrafficLight;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -23,7 +23,11 @@ class OperatorController extends BaseController
 
     public function index()
     {
-        return view('admin.operator.index');
+        $users = User::query()->where('role_id', 1)->get();
+
+        return view('admin.operators')->with([
+            'operators' => $users
+        ]);
     }
 
     public function view()
@@ -45,7 +49,7 @@ class OperatorController extends BaseController
             'comment' => ['sometimes', 'string']
         ]);
 
-        $appeal = Appeal::query()->findOrFail($request->id);
+        $appeal = Appeal::query()->with('engineer')->findOrFail($request->id);
 
         $appealOldStatus = $appeal->status;
         $appealOldTypeOfCrash = $appeal->type_of_crash;
@@ -56,7 +60,7 @@ class OperatorController extends BaseController
             $appeal->status = AppealStatus::from($request->status);
 
             if ($appeal->status !== $appealOldStatus) {
-                $logText .= 'Оператор поменял статус заявки c ' . $appealOldStatus->title() . ' на ' . $appeal->status->title() . '\r';
+                $logText .= 'Оператор поменял статус заявки c ' . $appealOldStatus->title() . ' на ' . $appeal->status->title();
             }
         }
 
@@ -64,7 +68,7 @@ class OperatorController extends BaseController
             $appeal->type_of_crash = TypeOfCrash::from($request->type_of_crash);
 
             if ($appeal->type_of_crash !== $appealOldTypeOfCrash) {
-                $logText .= 'Оператор поменял тип неисправности с ' . $appealOldTypeOfCrash->title() . ' на ' . $appeal->type_of_crash->title() . '\r';
+                $logText .= 'Оператор поменял тип неисправности с ' . $appealOldTypeOfCrash->title() . ' на ' . $appeal->type_of_crash->title();
             }
         }
 
@@ -74,7 +78,7 @@ class OperatorController extends BaseController
 
         if ($request->responsible) {
             if ($appeal->engineer_id !== $request->responsible) {
-                $logText .= 'Оператор поменял инженера '  . ' на ' . $appeal->type_of_crash->title() . '\r';
+                $logText .= 'Оператор поменял инженера '  . ' на ' . $appeal->engineer?->name;
             }
             $appeal->engineer_id = $request->responsible;
         }
@@ -84,6 +88,46 @@ class OperatorController extends BaseController
         AppealLog::query()->create([
             'appeal_id' => $appeal->id,
             'log_text' => $logText,
+            'status' => $appeal->status
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function sendToEngineer(Request $request, $id)
+    {
+        $appeal = Appeal::query()->findOrFail($id);
+
+        $appeal->operator_comment = $request->comment;
+        $appeal->status = AppealStatus::Returned;
+
+        $appeal->save();
+
+        AppealLog::query()->create([
+            'appeal_id' => $id,
+            'status' => $appeal->status->value,
+            'operator_comment' => $request->comment,
+            'log_text' => 'Оператор отправил заявку на доработку'
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function close(Request $request, $id)
+    {
+        $appeal = Appeal::query()->findOrFail($id);
+
+        $appeal->operator_comment = $request->comment;
+
+        $appeal->status = AppealStatus::CLOSED;
+
+        $appeal->save();
+
+        AppealLog::query()->create([
+            'appeal_id' => $id,
+            'status' => $appeal->status->value,
+            'log_text' => 'Оператор закрыл заявку',
+            'operator_comment' => $request->comment,
         ]);
 
         return redirect()->back();

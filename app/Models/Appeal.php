@@ -19,7 +19,7 @@ class Appeal extends Model
 
     public function trafficLight()
     {
-        return $this->belongsTo(TrafficLights::class);
+        return $this->belongsTo(TrafficLight::class);
     }
 
     public function operator()

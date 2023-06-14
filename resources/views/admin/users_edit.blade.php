@@ -1,11 +1,11 @@
 @extends('admin.dashboard')
 
 @section('content')
-    <h1 class="pb-4">Заявка номер {{$appeal->id}}</h1>
+    <h1 class="pb-4">Пользователь {{$user->email}}</h1>
     <div class="row">
         <div class="col-8">
             <div class="appeal card p-3">
-                <form action="{{route('appeals.operator_save')}}" method="post">
+                <form action="{{route('users.save')}}" method="post">
                     <input type="hidden" value="{{$appeal->id}}" name="id">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item appeal-crash"><b>Тип неисправности:</b>

@@ -30,3 +30,8 @@ iframe{
 .appeal-map {
     height: 400px;
 }
+
+.current-link {
+    background-color: white;
+    color: black!important;
+}

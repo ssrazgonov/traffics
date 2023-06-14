@@ -36,10 +36,9 @@
                     <td>{{$appeal->created_at}}</td>
                     <td>{{$appeal->trafficLight->address}}</td>
                     <td>{{$appeal->status->title()}}</td>
-                    <td>{{$appeal->engineer->name}}</td>
+                    <td>{{$appeal->engineer?->name ?? 'Не назначено'}}</td>
                     <td>
                         <a href="{{route('appeals.view', $appeal->id)}}">перейти</a>
-                        <a href="{{route('appeals.edit', $appeal->id)}}">редактировать</a>
                     </td>
                 </tr>
             @endforeach

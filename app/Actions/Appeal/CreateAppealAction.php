@@ -25,6 +25,7 @@ class CreateAppealAction
             AppealLog::query()->create([
                 'appeal_id' => $appeal->id,
                 'log_text' => 'Статус заявки: ' . $appeal->status->getTitle() . ' Заявка создана.',
+                'status' => $appeal->status
             ]);
 
         } catch (\Throwable $e) {

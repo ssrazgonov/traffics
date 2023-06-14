@@ -2,7 +2,7 @@
 
 namespace App\Actions\TrafficLights;
 
-use App\Models\TrafficLights;
+use App\Models\TrafficLight;
 
 class LoadFromCSVAction
 {
@@ -31,7 +31,7 @@ class LoadFromCSVAction
 
             $address = json_decode($traffic_light[1])?->name ?? '';
 
-            TrafficLights::query()->updateOrCreate([
+            TrafficLight::query()->updateOrCreate([
                 'address' => $address,
             ], [
                 'latitude' => $location_x,

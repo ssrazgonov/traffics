@@ -26,7 +26,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/dashboard">Перейти в панель
+                            <?php
+                                if (auth()->check()) {
+                                    $href = '/dashboard';
+                                } else {
+                                    $href = '/auth/login';
+                                }
+                            ?>
+                            <a class="nav-link active" aria-current="page" href="<?= $href ?>">Перейти в панель
                                 управления</a>
                         </li>
                     </ul>
@@ -45,6 +52,9 @@
                 @if(session()->has('success_appeal_create'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         Спасибо! Ваше сообщение о неисправности принято.
+                        @if(session()->has('feedback'))
+                            На ваше email: {{session()->get('feedback')}} придет уведомление
+                        @endif
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
@@ -66,16 +76,21 @@
                         <div class="mb-3">
                             <label for="select" class="form-label">Выберите неисправность</label>
                             <select id="select" class="form-select" name="type_of_crash">
-                                <option>Светофор не горит</option>
-                                <option>Светофор горит постоянно</option>
-                                <option>Светофор 'моргает' желтым светом</option>
-                                <option>Другая неисправность</option>
+                                <option value="{{\App\Enums\TypeOfCrash::NOT_LIGHT}}">Светофор не горит</option>
+                                <option value="{{\App\Enums\TypeOfCrash::LIGHT_PERMANENTLY}}">Светофор горит постоянно</option>
+                                <option value="{{\App\Enums\TypeOfCrash::YELLOW_LIGHT}}">Светофор 'моргает' желтым светом</option>
+                                <option value="value="{{\App\Enums\TypeOfCrash::OTHER}}">Другая неисправность</option>
                             </select>
                         </div>
 
                         <div class="mb-3">
-                            <label for="select" class="form-label">Комментарий</label>
-                            <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                            <label for="appeal-comment" class="form-label">Комментарий</label>
+                            <textarea name="comment" id="appeal-comment" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="select" class="form-label">Email для оповещений</label>
+                            <input class="form-control" type="email" name="email" placeholder="example@test.com">
                         </div>
                         <button type="submit" class="btn btn-primary">Отправить сообщение</button>
                     </fieldset>
@@ -90,10 +105,10 @@
         <p>Дипломная работа</p>
     </div>
 </footer>
-<script type="text/javascript">
 
+<script type="text/javascript">
+    var currentTrafficLightId = {{$trafficId ?? 'null'}};
     var traffics = @json($traffic_lights);
-    console.log(traffics);
 </script>
 <script src="/app.js?version_1.0"></script>
 </body>
