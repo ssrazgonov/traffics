@@ -29,4 +29,10 @@ class AuthController extends BaseController
 
         return redirect()->back()->withErrors(['message' => 'Неверные учетные данные']);
     }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/');
+    }
 }

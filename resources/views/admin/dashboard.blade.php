@@ -257,7 +257,7 @@
                 <strong>{{auth()->user()->name}}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="#">Выйти</a></li>
+                <li><a class="dropdown-item" href="{{route('auth.logout')}}">Выйти</a></li>
             </ul>
         </div>
     </div>

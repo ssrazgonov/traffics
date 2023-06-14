@@ -47,3 +47,4 @@ Route::get('/dashboard/traffic-lights/edit/{id}', [\App\Http\Controllers\Traffic
 
 Route::get('/auth/login', [\App\Http\Controllers\AuthController::class, 'loginPage']);
 Route::post('/auth/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('auth-login');
+Route::get('/auth/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('auth.logout');
