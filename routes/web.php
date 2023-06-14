@@ -40,9 +40,9 @@ Route::get('/dashboard/operators/edit/{id}', [\App\Http\Controllers\OperatorCont
 Route::get('/dashboard/engineers/list', [\App\Http\Controllers\EngineerController::class, 'index'])->name('engineers.list');
 Route::get('/dashboard/engineers/edit/{id}', [\App\Http\Controllers\EngineerController::class, 'edit'])->name('engineers.edit');;
 
-Route::get('/dashboard/traffic-lights/list', [\App\Http\Controllers\TrafficLightController::class, 'index']);
+Route::get('/dashboard/traffic-lights/list', [\App\Http\Controllers\TrafficLightController::class, 'index'])->name('traffic_lights.list');
 Route::get('/dashboard/traffic-lights/view/{id}', [\App\Http\Controllers\TrafficLightController::class, 'view']);
-Route::get('/dashboard/traffic-lights/edit/{id}', [\App\Http\Controllers\TrafficLightController::class, 'edit']);
+Route::get('/dashboard/traffic-lights/edit/{id}', [\App\Http\Controllers\TrafficLightController::class, 'edit'])->name('traffic_lights.edit');
 
 
 Route::get('/auth/login', [\App\Http\Controllers\AuthController::class, 'loginPage']);

@@ -18,7 +18,10 @@ class TrafficLightController extends BaseController
 
     public function index()
     {
-        return view('admin.traffic_light.index');
+        $traffics = TrafficLight::query()->paginate(10);
+        return view('admin.traffic_lights')->with([
+            'traffics' => $traffics
+        ]);
     }
 
     public function view()

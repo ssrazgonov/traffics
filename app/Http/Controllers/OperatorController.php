@@ -54,12 +54,12 @@ class OperatorController extends BaseController
         $appealOldStatus = $appeal->status;
         $appealOldTypeOfCrash = $appeal->type_of_crash;
 
-        $logText = '';
+        $logText = '    ';
 
         if ($request->status) {
             $appeal->status = AppealStatus::from($request->status);
 
-            if ($appeal->status !== $appealOldStatus) {
+            if ($appeal->status != $appealOldStatus) {
                 $logText .= 'Оператор поменял статус заявки c ' . $appealOldStatus->title() . ' на ' . $appeal->status->title();
             }
         }
@@ -77,19 +77,26 @@ class OperatorController extends BaseController
         }
 
         if ($request->responsible) {
-            if ($appeal->engineer_id !== $request->responsible) {
-                $logText .= 'Оператор поменял инженера '  . ' на ' . $appeal->engineer?->name;
+            if ($appeal->engineer_id != $request->responsible) {
+                $appeal->engineer_id = $request->responsible;
+                $eng = User::findOrFail($request->responsible);
+                $logText .= 'Оператор поменял инженера '  . ' на ' . $eng?->name;
             }
-            $appeal->engineer_id = $request->responsible;
         }
+
+        $dirty = count($appeal->getDirty());
 
         $appeal->save();
 
-        AppealLog::query()->create([
-            'appeal_id' => $appeal->id,
-            'log_text' => $logText,
-            'status' => $appeal->status
-        ]);
+        if ($dirty) {
+            AppealLog::query()->create([
+                'appeal_id' => $appeal->id,
+                'log_text' => $logText,
+                'status' => $appeal->status
+            ]);
+        }
+
+
 
         return redirect()->back();
     }
@@ -129,6 +136,17 @@ class OperatorController extends BaseController
             'log_text' => 'Оператор закрыл заявку',
             'operator_comment' => $request->comment,
         ]);
+
+        $traffic = TrafficLight::query()->findOrFail($appeal->traffic_light_id);
+
+        $appeals = Appeal::query()->where('traffic_light_id', $appeal->traffic_light_id)->whereNotIn('status', [
+            AppealStatus::CLOSED, AppealStatus::REJECTED
+        ])->count();
+
+        if (!$appeals) {
+            $traffic->status = 'working';
+            $traffic->save();
+        }
 
         return redirect()->back();
     }

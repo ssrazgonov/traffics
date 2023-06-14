@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="pb-4">Необработанные заявки</h1>
+    <h1 class="pb-4">Список светофоров</h1>
     <div class="appeals-table">
         <table class="text-center table-light table">
             <tr>
@@ -10,24 +10,26 @@
                     id
                 </th>
                 <th>
-                    время
+                    адрес
                 </th>
                 <th>
-                    светофор
+                    qr код
                 </th>
                 <th>статус</th>
-                <th>
-                    действия
-                </th>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>10.02.2023</td>
-                <td>ул. Хренникова</td>
-                <td>необработанно</td>
-                <td><a href="">перейти</a></td>
-            </tr>
+            @foreach($traffics as $traffic)
+                <tr>
+                    <td>{{$traffic->id}}</td>
+                    <td>{{$traffic->address}}</td>
+                    <td><a target="_blank" href="/storage/traffic_lights/{{$traffic->qr_code}}"><img width="100px" src="/storage/traffic_lights/{{$traffic->qr_code}}" alt=""></a></td>
+                    <td>{{$traffic->status}}</td>
+                </tr>
+            @endforeach
         </table>
+
+        <div class="d-flex">
+            {{$traffics->links()}}
+        </div>
     </div>
 
 @endsection

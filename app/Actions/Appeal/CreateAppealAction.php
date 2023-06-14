@@ -7,6 +7,7 @@ use App\Dto\Action\Appeal\CreateAppealActionResponseDto;
 use App\Enums\AppealStatus;
 use App\Models\Appeal;
 use App\Models\AppealLog;
+use App\Models\TrafficLight;
 
 class CreateAppealAction
 {
@@ -24,9 +25,14 @@ class CreateAppealAction
 
             AppealLog::query()->create([
                 'appeal_id' => $appeal->id,
-                'log_text' => 'Статус заявки: ' . $appeal->status->getTitle() . ' Заявка создана.',
+                'log_text' => 'Статус заявки: ' . $appeal->status->title() . ' Заявка создана.',
                 'status' => $appeal->status
             ]);
+
+            $tf = TrafficLight::query()->findOrFail($dto->trafficLightId);
+
+            $tf->status = 'not_working';
+            $tf->save();
 
         } catch (\Throwable $e) {
             $response->success = false;

@@ -22,12 +22,7 @@ class SiteController extends BaseController
             $loadFromCSVAction();
         }
 
-        $traffic_lights = TrafficLight::with('appeals')->get()->each(function ($traffic) {
-
-            if (count($traffic->appeals) > 0) {
-                $traffic->status = 'not_working';
-            }
-        })->toArray();
+        $traffic_lights = TrafficLight::with('appeals')->get()->toArray();
 
         return view('welcome')->with([
             'traffic_lights' => $traffic_lights,

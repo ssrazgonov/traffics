@@ -8,6 +8,14 @@
                 <form action="{{route('appeals.operator_save')}}" method="post">
                     <input type="hidden" value="{{$appeal->id}}" name="id">
                     <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item appeal-comment">
+                            <b>Комментарий заявителя: </b> {{$appeal->comment}}
+                        </li>
+
+                        <li class="list-group-item appeal-status">
+                            <b>Статус:</b> {{$appeal->status->title()}}
+                        </li>
                         <li class="list-group-item appeal-crash"><b>Тип неисправности:</b>
                             <select name="type_of_crash" class="form-control mt-3">
                                 @foreach($type_of_crash as $type)
@@ -16,10 +24,6 @@
                                 @endforeach
                             </select>
                         </li>
-                        <li class="list-group-item appeal-comment">
-                            <b>Комментарий: </b>
-                            <textarea class="form-control mt-3" name="comment">{{$appeal->comment}}</textarea>
-                        </li>
                         <li class="list-group-item appeal-responsible">
                             <b>Ответственный:</b>
                             <select name="responsible" class="form-control mt-3">
@@ -27,15 +31,6 @@
                                 @foreach($engineers as $engineer)
                                         <?php $selected = $appeal->engineer_id == $engineer->id ? 'selected' : ''; ?>
                                     <option {{$selected}} value="{{$engineer->id}}">{{$engineer->name}}</option>
-                                @endforeach
-                            </select>
-                        </li>
-                        <li class="list-group-item appeal-status">
-                            <b>Статус:</b>
-                            <select name="status" class="form-control mt-3">
-                                @foreach($statuses as $status)
-                                        <?php $selected = $appeal->status == $status ? 'selected' : ''; ?>
-                                    <option {{$selected}} value="{{$status}}">{{$status->title()}}</option>
                                 @endforeach
                             </select>
                         </li>

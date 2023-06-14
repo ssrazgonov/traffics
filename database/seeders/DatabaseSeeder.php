@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\Roles;
 use App\Models\Role;
+use App\Models\TrafficLight;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -55,5 +56,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role_id' => 3,
         ]);
+
     }
 }
