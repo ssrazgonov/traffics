@@ -30,7 +30,7 @@
 <main class="container-fluid">
     <div class="traffic-map">
         <div class="row">
-            <div class="col-md-3 order-sm-2 mb-5">
+            <div class="col-md-3 order-md-2 mb-5">
                 @if(session()->has('success_appeal_create'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         Спасибо! Ваше сообщение о неисправности принято.
@@ -79,7 +79,7 @@
                 </form>
             </div>
 
-            <div class="col-md-9 order-sm-1">
+            <div class="col-md-9 order-md-1">
                 <div class="traffic-map" id="map"></div>
             </div>
 
