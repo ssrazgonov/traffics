@@ -25,26 +25,40 @@ class DashboardController extends BaseController
 
         $appealsInWork = Appeal::query()->where('status', AppealStatus::IN_WORK)->count();
 
-        $appealsInWork = $appealsInWork * 100 / $appeals;
+        $appealsInWorkProc = $appealsInWork * 100 / $appeals;
 
         $appealsComplete = Appeal::query()->where('status', AppealStatus::CLOSED)->count();
 
-        $appealsComplete = $appealsComplete * 100 / $appeals;
+        $appealsCompleteProc = $appealsComplete * 100 / $appeals;
 
         $appealsNotProcessed = Appeal::query()->where('status', AppealStatus::NOT_PROCESSED)->count();
 
-        $appealsNotProcessed = $appealsNotProcessed * 100 / $appeals;
+        $appealsNotProcessedProc = $appealsNotProcessed * 100 / $appeals;
 
 
         $tf = TrafficLight::query()->count();
 
         $tfW = TrafficLight::query()->where('status', 'working')->count();
-        $tfW = $tfW * 100 / $tf;
+        $tfWProc = $tfW * 100 / $tf;
         $tfNW = TrafficLight::query()->where('status', 'not_working')->count();
-        $tfNW = $tfNW * 100 / $tf;
+        $tfNWProc = $tfNW * 100 / $tf;
 
 
-        return view('admin.index')->with(compact('appeals', 'appealsInWork', 'appealsComplete', 'appealsNotProcessed', 'tfW', 'tfNW'));
+        return view('admin.index')->with(compact(
+            'appeals',
+            'appealsInWork',
+            'appealsInWorkProc',
+            'appealsComplete',
+            'appealsCompleteProc',
+            'appealsNotProcessed',
+            'appealsNotProcessedProc',
+            'tf',
+            'tfW',
+            'tfWProc',
+            'tfNW',
+            'tfNWProc',
+            )
+        );
     }
 
 }
