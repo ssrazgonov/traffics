@@ -9,6 +9,9 @@
             font-size: 17px;
             padding-right: 30px;
         }
+        .progress {
+            max-width: 600px;
+        }
     </style>
 
     <h3 class="mt-5">Заявки</h3>
