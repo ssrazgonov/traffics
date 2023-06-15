@@ -84,6 +84,12 @@
             </div>
 
         </div>
+        <div class="row">
+            <div class="d-flex flex-column align-items-center pt-3">
+                <p>Дипломная работа Кузнецова Владислава</p>
+                <p>Липецк 2023</p>
+            </div>
+        </div>
     </div>
     </div>
 </main>
