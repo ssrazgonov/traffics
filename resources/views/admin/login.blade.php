@@ -18,7 +18,7 @@
                 </div>
             @endif
 
-            <h1>Вход в панель управления</h1>
+            <h1>Вход в систему мониторинга состояния светофоров</h1>
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <input type="email" id="form2Example1" class="form-control" name="email"/>
