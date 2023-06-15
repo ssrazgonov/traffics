@@ -30,10 +30,7 @@
 <main class="container-fluid">
     <div class="traffic-map">
         <div class="row">
-            <div class="col-md-9">
-                <div class="traffic-map" id="map"></div>
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-3 order-sm-2 mb-5">
                 @if(session()->has('success_appeal_create'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         Спасибо! Ваше сообщение о неисправности принято.
@@ -81,15 +78,15 @@
                     </fieldset>
                 </form>
             </div>
+
+            <div class="col-md-9 order-sm-1">
+                <div class="traffic-map" id="map"></div>
+            </div>
+
         </div>
     </div>
     </div>
 </main>
-<footer class="text-center bg-body-tertiary">
-    <div class="">
-        <p>Дипломная работа</p>
-    </div>
-</footer>
 
 <script type="text/javascript">
     var currentTrafficLightId = {{$trafficId ?? 'null'}};
