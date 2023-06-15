@@ -34,6 +34,9 @@
                                 @endforeach
                             </select>
                         </li>
+                        <li class="list-group-item appeal-status">
+                            <b>Адрес:</b> {{$appeal->trafficLight->address}}
+                        </li>
                         <li class="list-group-item appeal-map" id="appeal-map"></li>
                         <li class="list-group-item appeal-status">
                             <button class="btn btn-primary">Сохранить</button>
@@ -61,11 +64,11 @@
         ymaps.ready(function() {
 
             let myMap = new ymaps.Map("appeal-map", {
-                center: [52.599504, 39.632270],
+                center: [{{$appeal->trafficLight->latitude}}, {{$appeal->trafficLight->longitude}}],
                 zoom: 12
             });
 
-            var myPlacemark = new ymaps.Placemark([52.599504, 39.632270]);
+            var myPlacemark = new ymaps.Placemark([{{$appeal->trafficLight->latitude}}, {{$appeal->trafficLight->longitude}}]);
 
             myMap.geoObjects.add(myPlacemark);
         })
