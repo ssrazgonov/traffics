@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\SiteController::class, 'main']);
+Route::post('/dashboard/appeals/create', [\App\Http\Controllers\AppealController::class, 'createAppeal'])->name('appeal.create');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'dashboard']);
 
-    Route::post('/dashboard/appeals/create', [\App\Http\Controllers\AppealController::class, 'createAppeal'])->name('appeal.create');
+
 
     Route::get('/dashboard/appeals/backlog', [\App\Http\Controllers\AppealController::class, 'getInBacklog'])->name('appeals.log');
     Route::get('/dashboard/appeals/works', [\App\Http\Controllers\AppealController::class, 'getInWorks'])->name('appeals.works');
