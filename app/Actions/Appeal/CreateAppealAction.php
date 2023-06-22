@@ -8,6 +8,7 @@ use App\Enums\AppealStatus;
 use App\Models\Appeal;
 use App\Models\AppealLog;
 use App\Models\TrafficLight;
+use Illuminate\Support\Str;
 
 class CreateAppealAction
 {
@@ -16,11 +17,16 @@ class CreateAppealAction
         $response = new CreateAppealActionResponseDto();
 
         try {
+
+            $filename = Str::random(9) . '_' . now()->format('Y-m-d_h-m-s') . '__'. $dto->file->getClientOriginalName();
+
+            $dto->file->move(storage_path('app/public/images_appeal'), $filename);
             $appeal = Appeal::query()->create([
                 'traffic_light_id' => $dto->trafficLightId,
                 'type_of_crash' => $dto->typeOfCrash,
                 'comment' => $dto->comment,
                 'status' => AppealStatus::NOT_PROCESSED->value,
+                'comment_file' => $filename,
             ]);
 
             AppealLog::query()->create([

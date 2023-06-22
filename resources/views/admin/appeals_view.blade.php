@@ -8,6 +8,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item appeal-crash"><b>Тип неисправности:</b> {{$appeal->type_of_crash->title()}}</li>
                     <li class="list-group-item appeal-comment"><b>Комментарий: </b>{{$appeal->comment}}</li>
+                    <li class="list-group-item appeal-comment"><b>Фото светофора: </b><img style="max-width: 100%; max-height: 300px" src="/storage/images_appeal/{{$appeal->comment_file}}" alt="">{{$appeal->comment_file}}</li>
                     <li class="list-group-item appeal-responsible">
                         <b>Ответственный:</b> {{$appeal->engineer?->name}}
                     </li>
@@ -26,7 +27,7 @@
                     @if($appeal->engineer_files)
                     @foreach(explode(',', rtrim($appeal->engineer_files, ',')) as $file)
                         <li class="list-group-item appeal-status">
-                            <b>Файл отчета:</b> <a target="_blank" href="{{$file}}">{{$file}}</a>
+                            <b>Файл отчета:</b> <a target="_blank" href="/storage/images_engineer/{{$file}}">{{$file}}</a>
                         </li>
                     @endforeach
                     @endif

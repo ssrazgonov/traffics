@@ -40,7 +40,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                <form action="{{route('appeal.create')}}" method="POST">
+                <form action="{{route('appeal.create')}}" method="POST" enctype="multipart/form-data">
                     <fieldset disabled id="main-form">
                         <div class="mb-3">
                             <h3>Сообщение о неисправности светофора</h3>
@@ -67,7 +67,12 @@
 
                         <div class="mb-3">
                             <label for="appeal-comment" class="form-label">Комментарий</label>
-                            <textarea name="comment" id="appeal-comment" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="comment" id="appeal-comment" cols="30" rows="5" class="form-control"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="appeal-comment" class="form-label">Фото светофора</label>
+                            <input type="file" name="comment_file">
                         </div>
 
                         <div class="mb-3">

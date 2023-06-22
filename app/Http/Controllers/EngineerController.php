@@ -16,6 +16,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class EngineerController extends BaseController
 {
@@ -47,9 +48,9 @@ class EngineerController extends BaseController
         $imagesToSave = "";
 
         foreach ($images ?? [] as $image) {
-            $imageName = $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
-            $imagesToSave .= '/images/' . $imageName . ',';
+            $imageName = Str::random(6) . '_' . now()->format('Y-m-d_h-m-s') . '__'. $image->getClientOriginalName();
+            $image->move(storage_path('app/public/images_engineer'), $imageName);
+            $imagesToSave .= $imageName . ',';
         }
 
         $appeal->status = AppealStatus::Awaiting;

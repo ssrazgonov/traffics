@@ -37,6 +37,7 @@ class AppealController extends BaseController
         $dto->trafficLightId = $request->traffic_light_id;
         $dto->typeOfCrash= $request->type_of_crash;
         $dto->comment = $request->comment;
+        $dto->file = $request->comment_file;
 
         $createAppealAction($dto);
 
